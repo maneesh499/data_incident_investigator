@@ -1,0 +1,7 @@
+{
+    "pipeline_name": "orders_ingestion",
+    "run_id": "run_001",
+    "status": "SUCCESS",
+    "actual_record_count": 6200000,
+    "expected_record_count": 10000000
+}

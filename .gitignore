@@ -21,6 +21,8 @@ venv.bak/
 # Project specific
 data/raw/*
 !data/raw/.gitkeep
+!data/raw/pipeline_runs/
+!data/raw/pipeline_runs/*
 data/processed/*
 !data/processed/.gitkeep
 data/incidents/*
