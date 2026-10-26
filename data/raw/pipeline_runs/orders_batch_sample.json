@@ -1,0 +1,30 @@
+[
+  {
+    "order_id": "ord_1001",
+    "customer_id": "cust_501",
+    "order_timestamp": "2026-10-26T06:15:00Z",
+    "amount": 250.75,
+    "status": "COMPLETED"
+  },
+  {
+    "order_id": "ord_1002",
+    "customer_id": null,
+    "order_timestamp": "2026-10-26T06:20:00Z",
+    "amount": 49.99,
+    "status": "COMPLETED"
+  },
+  {
+    "order_id": "ord_1001",
+    "customer_id": "cust_501",
+    "order_timestamp": "2026-10-26T06:15:00Z",
+    "amount": 250.75,
+    "status": "COMPLETED"
+  },
+  {
+    "order_id": "ord_1003",
+    "customer_id": "cust_503",
+    "order_timestamp": "2026-10-25T14:00:00Z",
+    "amount": 120.00,
+    "status": "PENDING"
+  }
+]
