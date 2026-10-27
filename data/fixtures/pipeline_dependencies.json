@@ -1,0 +1,108 @@
+{
+  "assets": [
+    {
+      "asset_id": "source_orders_db",
+      "name": "E-Commerce PostgreSQL Orders Table",
+      "asset_type": "source_table",
+      "metadata": {
+        "system": "PostgreSQL",
+        "update_frequency": "continuous",
+        "owner": "checkout_team"
+      }
+    },
+    {
+      "asset_id": "orders_ingestion",
+      "name": "Orders Ingestion Pipeline",
+      "asset_type": "ingestion_pipeline",
+      "metadata": {
+        "engine": "Azure Data Factory",
+        "schedule": "hourly",
+        "criticality": "tier_1"
+      }
+    },
+    {
+      "asset_id": "bronze_orders",
+      "name": "Bronze Raw Orders Lake Storage",
+      "asset_type": "storage_container",
+      "metadata": {
+        "format": "parquet",
+        "layer": "bronze"
+      }
+    },
+    {
+      "asset_id": "orders_cleaning_pipeline",
+      "name": "Orders Deduplication and Cleaning Pipeline",
+      "asset_type": "transformation_pipeline",
+      "metadata": {
+        "engine": "Databricks Spark",
+        "layer": "silver"
+      }
+    },
+    {
+      "asset_id": "silver_orders",
+      "name": "Silver Cleaned Orders Table",
+      "asset_type": "table",
+      "metadata": {
+        "format": "delta",
+        "primary_key": "order_id"
+      }
+    },
+    {
+      "asset_id": "revenue_mart_pipeline",
+      "name": "Daily Revenue Aggregation Pipeline",
+      "asset_type": "transformation_pipeline",
+      "metadata": {
+        "schedule": "daily",
+        "layer": "gold"
+      }
+    },
+    {
+      "asset_id": "gold_daily_revenue",
+      "name": "Gold Daily Sales & Revenue Mart",
+      "asset_type": "data_mart",
+      "metadata": {
+        "layer": "gold",
+        "consumers": ["finance", "executive"]
+      }
+    },
+    {
+      "asset_id": "executive_sales_dashboard",
+      "name": "Executive Sales PowerBI Dashboard",
+      "asset_type": "dashboard",
+      "metadata": {
+        "refresh": "daily 07:00 UTC",
+        "audience": "c_suite"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "upstream": "source_orders_db",
+      "downstream": "orders_ingestion"
+    },
+    {
+      "upstream": "orders_ingestion",
+      "downstream": "bronze_orders"
+    },
+    {
+      "upstream": "bronze_orders",
+      "downstream": "orders_cleaning_pipeline"
+    },
+    {
+      "upstream": "orders_cleaning_pipeline",
+      "downstream": "silver_orders"
+    },
+    {
+      "upstream": "silver_orders",
+      "downstream": "revenue_mart_pipeline"
+    },
+    {
+      "upstream": "revenue_mart_pipeline",
+      "downstream": "gold_daily_revenue"
+    },
+    {
+      "upstream": "gold_daily_revenue",
+      "downstream": "executive_sales_dashboard"
+    }
+  ]
+}
