@@ -1,0 +1,8 @@
+{
+    "pipeline_name": "orders_cleaning_pipeline",
+    "run_id": "run_002",
+    "status": "SUCCESS",
+    "actual_record_count": 4,
+    "expected_record_count": 4,
+    "batch_data_file": "orders_batch_sample.json"
+}
